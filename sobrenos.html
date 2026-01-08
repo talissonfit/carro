@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nós | Talisson Motors</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root { --gold: #d4af37; --dark: #121212; --card: #1e1e1e; }
+        body { font-family: 'Open Sans', sans-serif; background: var(--dark); color: #f5f5f5; margin: 0; padding: 0; }
+        
+        /* HEADER */
+        header { background: rgba(0,0,0,0.95); padding: 20px 0; border-bottom: 2px solid var(--gold); }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--gold); font-family: 'Montserrat', sans-serif; text-decoration: none; text-transform: uppercase; }
+        .back-btn { color: #fff; text-decoration: none; font-weight: bold; font-family: 'Montserrat', sans-serif; border: 1px solid #fff; padding: 5px 15px; border-radius: 5px; }
+        .back-btn:hover { background: var(--gold); color: #000; border-color: var(--gold); }
+
+        /* HERO */
+        .hero-sobre {
+            height: 300px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.6), #121212), url('https://images.unsplash.com/photo-1562519819-016930d71503?q=80&w=1920');
+            background-size: cover;
+            background-position: center;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .hero-sobre h1 { font-size: 3rem; font-family: 'Montserrat', sans-serif; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; text-align: center; }
+
+        /* CONTEÚDO */
+        .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+        
+        .story-section { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; }
+        
+        .story-img { width: 100%; border-radius: 10px; border: 2px solid var(--gold); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        
+        .story-text h2 { color: var(--gold); font-family: 'Montserrat', sans-serif; font-size: 2rem; margin-bottom: 20px; margin-top: 0; }
+        
+        /* GARANTIA DE TEXTO VISÍVEL */
+        .story-text p { 
+            line-height: 1.8; 
+            color: #ffffff !important; /* Força cor branca */
+            font-size: 1.1rem; 
+            white-space: pre-wrap; 
+            background: #1e1e1e; /* Fundo cinza caso o preto falhe */
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--gold);
+        }
+
+        /* AVISO DE ERRO */
+        .aviso-vazio { color: #ff4444; font-weight: bold; background: #330000; padding: 15px; border: 1px solid red; display: none; }
+
+        /* VALORES */
+        .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 60px; }
+        .value-card { background: var(--card); padding: 30px; text-align: center; border-radius: 10px; border: 1px solid #333; }
+        .value-card i { font-size: 2.5rem; color: var(--gold); margin-bottom: 20px; }
+        .value-card h3 { font-family: 'Montserrat', sans-serif; margin-bottom: 10px; color: #fff; }
+        .value-card p { font-size: 0.9rem; color: #999; }
+
+        footer { text-align: center; padding: 40px 0; margin-top: 80px; border-top: 1px solid #333; color: #666; }
+
+        @media (max-width: 768px) {
+            .story-section { grid-template-columns: 1fr; }
+            .values-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">TALISSON MOTORS</a>
+            <a href="index.html" class="back-btn">← Voltar para a Loja</a>
+        </div>
+    </header>
+
+    <div class="hero-sobre">
+        <h1>Nossa História</h1>
+    </div>
+
+    <div class="container">
+        
+        <div class="story-section">
+            <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=1000" class="story-img">
+            
+            <div class="story-text">
+                <h2>Tradição e Confiança</h2>
+                
+                <div id="texto-dinamico"></div>
+                
+                <div id="aviso" class="aviso-vazio">
+                    ⚠️ O texto ainda não apareceu? <br>
+                    Certifique-se de acessar o <b>admin.html</b> pelo mesmo link do servidor (127.0.0.1) e salvar novamente!
+                </div>
+            </div>
+        </div>
+
+        <div class="values-grid">
+            <div class="value-card">
+                <i class="fas fa-certificate"></i>
+                <h3>Procedência</h3>
+                <p>Veículos periciados e aprovados.</p>
+            </div>
+            <div class="value-card">
+                <i class="fas fa-handshake"></i>
+                <h3>Transparência</h3>
+                <p>Negociação clara e direta.</p>
+            </div>
+            <div class="value-card">
+                <i class="fas fa-star"></i>
+                <h3>Premium</h3>
+                <p>Especialistas em sonhos.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2024 Talisson Motors</p>
+    </footer>
+
+    <script>
+        // Tenta ler o banco de dados
+        const config = JSON.parse(localStorage.getItem('talisson_config')) || {};
+        const area = document.getElementById('texto-dinamico');
+        const aviso = document.getElementById('aviso');
+
+        // Debug no Console (Aperte F12 para ver)
+        console.log("Config carregada:", config);
+
+        if (config.sobre && config.sobre.trim() !== "") {
+            area.innerHTML = `<p>${config.sobre}</p>`;
+        } else {
+            area.innerHTML = ""; // Limpa
+            aviso.style.display = "block"; // Mostra aviso de ajuda
+        }
+    </script>
+</body>
+</html>

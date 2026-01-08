@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulação de Financiamento | Talisson Motors</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --gold: #d4af37; --dark: #121212; --card: #1e1e1e; }
+        body { font-family: 'Open Sans', sans-serif; background: var(--dark); color: #fff; margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        
+        .form-container { background: var(--card); padding: 40px; border-radius: 10px; border: 1px solid #333; border-top: 4px solid var(--gold); width: 100%; max-width: 500px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        
+        h2 { font-family: 'Montserrat', sans-serif; color: var(--gold); text-align: center; margin-bottom: 10px; text-transform: uppercase; }
+        p { text-align: center; color: #aaa; margin-bottom: 30px; font-size: 0.9rem; }
+
+        label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 0.9rem; margin-top: 15px; color: #ddd; }
+        input, select { width: 100%; padding: 12px; background: #333; border: 1px solid #444; color: white; border-radius: 5px; font-family: inherit; box-sizing: border-box; }
+        input:focus, select:focus { outline: none; border-color: var(--gold); }
+
+        .btn-submit { background: linear-gradient(45deg, #d4af37, #b8860b); color: #000; font-weight: bold; border: none; padding: 15px; width: 100%; border-radius: 5px; margin-top: 30px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .btn-submit:hover { filter: brightness(1.2); transform: scale(1.02); }
+
+        .back-link { display: block; text-align: center; margin-top: 20px; color: #888; text-decoration: none; font-size: 0.9rem; }
+        .back-link:hover { color: var(--gold); }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Simular Financiamento</h2>
+        <p>Preencha os dados abaixo para uma pré-análise rápida.</p>
+
+        <label>Nome Completo:</label>
+        <input type="text" id="nome" placeholder="Ex: João da Silva">
+
+        <label>Seu WhatsApp:</label>
+        <input type="number" id="zap" placeholder="Ex: 11999999999">
+
+        <label>CPF (Apenas números):</label>
+        <input type="number" id="cpf" placeholder="000.000.000-00">
+
+        <label>Veículo de Interesse:</label>
+        <select id="carro-select">
+            <option value="">Selecione um carro...</option>
+            </select>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div>
+                <label>Entrada (R$):</label>
+                <input type="number" id="entrada" placeholder="0,00">
+            </div>
+            <div>
+                <label>Parcelas:</label>
+                <select id="parcelas">
+                    <option value="12x">12x</option>
+                    <option value="24x">24x</option>
+                    <option value="36x">36x</option>
+                    <option value="48x">48x</option>
+                    <option value="60x">60x</option>
+                </select>
+            </div>
+        </div>
+
+        <button class="btn-submit" onclick="enviarProposta()">📤 Enviar para Análise</button>
+        <a href="index.html" class="back-link">← Voltar para a Loja</a>
+    </div>
+
+    <script>
+        // 1. Carregar carros do banco CORRETO (talisson_final_db)
+        const carros = JSON.parse(localStorage.getItem('talisson_final_db')) || [];
+        const select = document.getElementById('carro-select');
+
+        if (carros.length === 0) {
+            const opt = document.createElement('option');
+            opt.innerText = "Nenhum carro cadastrado no Admin";
+            select.appendChild(opt);
+        } else {
+            carros.forEach(c => {
+                const opt = document.createElement('option');
+                // Salva no valor: "CIVIC - 2.0 EXL - R$ 100.000"
+                opt.value = `${c.modelo} ${c.versao} (${c.preco})`;
+                // Mostra no texto: "CIVIC - 2.0 EXL (R$ 100.000)"
+                opt.innerText = `${c.modelo} - ${c.versao} | ${c.preco}`;
+                select.appendChild(opt);
+            });
+        }
+
+        // 2. Salvar o pedido (Lead)
+        function enviarProposta() {
+            const nome = document.getElementById('nome').value;
+            const zap = document.getElementById('zap').value;
+            const carro = document.getElementById('carro-select').value;
+            
+            if(!nome || !zap || !carro) return alert("Preencha Nome, WhatsApp e escolha o Carro!");
+
+            const lead = {
+                id: Date.now(),
+                nome: nome,
+                zap: zap,
+                cpf: document.getElementById('cpf').value,
+                carro: carro,
+                entrada: document.getElementById('entrada').value || "0",
+                parcelas: document.getElementById('parcelas').value,
+                data: new Date().toLocaleDateString() + " às " + new Date().toLocaleTimeString()
+            };
+
+            // Salva na lista de pedidos
+            const leads = JSON.parse(localStorage.getItem('talisson_leads')) || [];
+            leads.push(lead);
+            localStorage.setItem('talisson_leads', JSON.stringify(leads));
+
+            alert("✅ Proposta enviada com sucesso! \nNossa equipe analisará seu perfil.");
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>
