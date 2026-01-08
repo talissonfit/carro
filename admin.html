@@ -3,126 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Master | Talisson Motors</title>
+    <title>Master Admin | TALISSON Veículos</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: 'Montserrat', sans-serif; background: #121212; color: #fff; margin: 0; padding: 20px; display: flex; justify-content: center; }
-        
-        /* LOGIN */
-        #login-box { text-align: center; background: #1e1e1e; padding: 40px; border-radius: 10px; border: 1px solid #333; margin-top: 100px; width: 300px; }
-        input, select, textarea { background: #333; border: 1px solid #444; color: white; padding: 12px; width: 100%; border-radius: 5px; margin: 5px 0 15px 0; box-sizing: border-box; font-family: inherit; }
-        
-        /* PAINEL */
-        #painel { display: none; width: 100%; max-width: 1100px; }
-        
-        .grid-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        
-        .card-admin { background: #1e1e1e; padding: 25px; border-radius: 10px; border: 1px solid #333; border-top: 3px solid #d4af37; margin-bottom: 20px; }
-        
-        h2 { color: #d4af37; margin-top: 0; font-size: 1.2rem; border-bottom: 1px solid #333; padding-bottom: 10px; display: flex; align-items: center; gap: 10px; }
-        label { font-size: 0.8rem; color: #aaa; font-weight: bold; display: block; margin-top: 10px; }
+        /* DESIGN LUXO DARK */
+        :root { --gold: #d4af37; --bg: #0a0a0a; --card: #161616; --border: #252525; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; background: var(--bg); color: #fff; line-height: 1.6; }
 
-        .btn { padding: 12px; font-weight: bold; cursor: pointer; border-radius: 5px; width: 100%; border: none; transition: 0.3s; }
-        .btn-gold { background: #d4af37; color: #000; }
-        .btn-gold:hover { background: #fff; }
-        .btn-blue { background: #007bff; color: #fff; }
-        .btn-blue:hover { background: #0056b3; }
-        .btn-red { background: #b00020; color: #fff; width: auto; padding: 8px 20px; }
-
-        .check-oferta { background: #2a2a2a; padding: 10px; border-radius: 5px; display: flex; align-items: center; gap: 10px; cursor: pointer; border: 1px solid #444; margin-top: 10px; }
-        .check-oferta input { width: 20px; margin: 0; }
-
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .full { grid-column: 1 / -1; }
-
-        .item-lista { display: flex; justify-content: space-between; align-items: center; background: #222; padding: 10px; margin-bottom: 5px; border-radius: 4px; border-left: 3px solid #d4af37; }
-        .thumb { width:60px; height:40px; object-fit:cover; border-radius:3px; margin-right:10px; }
-
-        /* CARD ESPECIAL PARA LEADS (PEDIDOS) */
-        .lead-item { background: #1a252f; border-left: 4px solid #007bff; padding: 15px; margin-bottom: 10px; border-radius: 4px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
         
-        @media (max-width: 768px) { .grid-layout { grid-template-columns: 1fr; } }
+        #login-box { text-align: center; background: var(--card); padding: 50px; border-radius: 15px; border: 1px solid var(--border); border-top: 5px solid var(--gold); margin: 100px auto; width: 100%; max-width: 400px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+        input, textarea { background: #222; border: 1px solid var(--border); color: white; padding: 15px; width: 100%; border-radius: 8px; margin-bottom: 20px; font-family: inherit; transition: 0.3s; }
+        input:focus { border-color: var(--gold); outline: none; background: #2a2a2a; }
+
+        header { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
+        .logo-admin { color: var(--gold); font-weight: 700; letter-spacing: 2px; }
+
+        .grid-master { display: grid; grid-template-columns: 1fr 1.5fr; gap: 30px; }
+        .card-admin { background: var(--card); padding: 30px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 30px; position: relative; }
+        h2 { color: var(--gold); font-size: 1.1rem; text-transform: uppercase; margin-bottom: 25px; display: flex; align-items: center; gap: 10px; letter-spacing: 1px; }
+
+        .btn { padding: 15px 25px; font-weight: 700; cursor: pointer; border-radius: 8px; width: 100%; border: none; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .btn-gold { background: var(--gold); color: #000; }
+        .btn-gold:hover { background: #fff; transform: translateY(-2px); }
+        .btn-blue { background: #1a73e8; color: #fff; }
+        .btn-red { background: #b00020; color: #fff; font-size: 0.8rem; padding: 8px 15px; width: auto; }
+
+        /* BLOQUINHOS PARA ARRASTAR */
+        #preview-fotos { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 15px; background: #111; padding: 15px; border-radius: 8px; border: 1px dashed #444; min-height: 100px; }
+        .foto-box { position: relative; width: 110px; height: 110px; border-radius: 6px; overflow: hidden; border: 2px solid #333; transition: 0.3s; cursor: grab; }
+        .foto-box:active { cursor: grabbing; }
+        .foto-box.capa { border-color: var(--gold); transform: scale(1.05); z-index: 5; box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
+        .foto-box img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+        
+        .label-capa { position: absolute; top: 0; left: 0; background: var(--gold); color: #000; font-size: 9px; font-weight: bold; padding: 2px 5px; }
+        .btn-delete-foto { position: absolute; top: 5px; right: 5px; background: rgba(176, 0, 32, 0.8) !important; color: #fff; border-radius: 4px; border: none; cursor: pointer; padding: 2px 6px; font-size: 10px; z-index: 10; }
+
+        .item-lista { display: flex; justify-content: space-between; align-items: center; background: #1e1e1e; padding: 15px; margin-bottom: 10px; border-radius: 8px; border: 1px solid var(--border); transition: 0.3s; }
+        .thumb { width: 60px; height: 40px; object-fit: cover; border-radius: 4px; border: 1px solid var(--border); }
+        .badge-oferta { background: #cc0000; color: white; font-size: 0.6rem; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
+
+        @media (max-width: 900px) { .grid-master { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-    <div id="login-box">
-        <h2 style="justify-content:center; color:#d4af37">ÁREA RESTRITA</h2>
-        <input type="password" id="pass" placeholder="Senha">
-        <button class="btn btn-gold" onclick="logar()">Acessar Painel</button>
-    </div>
-
-    <div id="painel">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-            <h1 style="margin:0">Painel Master</h1>
-            <button class="btn btn-red" onclick="location.reload()">Sair</button>
+    <div class="container">
+        <div id="login-box">
+            <h1 class="logo-admin" style="margin-bottom: 30px;">TALISSON ADMIN</h1>
+            <input type="password" id="pass" placeholder="Senha de Acesso">
+            <button class="btn btn-gold" onclick="logar()">Acessar Painel</button>
         </div>
 
-        <div class="grid-layout">
-            
-            <div>
-                <div class="card-admin" style="border-top-color: #007bff;">
-                    <h2 style="color:#007bff">📄 Pedidos de Financiamento</h2>
-                    <div id="lista-leads"></div>
-                </div>
+        <div id="painel" style="display:none;">
+            <header>
+                <div class="logo-admin">PAINEL DE CONTROLE</div>
+                <button class="btn btn-red" onclick="location.reload()"><i class="fas fa-sign-out-alt"></i> Sair</button>
+            </header>
 
-                <div class="card-admin">
-                    <h2>📢 Banners Promocionais</h2>
-                    <label>Subir Imagem:</label>
-                    <input type="file" id="banner-upload" accept="image/*">
-                    <button class="btn btn-blue" onclick="salvarBannerPromo()">+ Adicionar Banner</button>
-                    <div id="lista-banners" style="margin-top:20px;"></div>
-                </div>
-
-                <div class="card-admin">
-                    <h2>🛠️ Configurações</h2>
-                    <label>WhatsApp:</label>
-                    <input type="text" id="cfg-zap" placeholder="Ex: 5512999999999">
-                    <label>Texto 'Sobre Nós':</label>
-                    <textarea id="cfg-sobre" rows="4"></textarea>
-                    <button class="btn btn-blue" onclick="salvarConfig()">💾 Salvar Config</button>
-                </div>
-            </div>
-
-            <div class="card-admin">
-                <h2>🚘 Cadastrar Veículo</h2>
-                <div class="form-grid">
-                    <div class="full">
-                        <label>Fotos (Várias):</label>
-                        <input type="file" id="fotos" multiple accept="image/*">
+            <div class="grid-master">
+                <aside>
+                    <div class="card-admin">
+                        <h2><i class="fas fa-tools"></i> Configurações</h2>
+                        <label>WhatsApp (DDD + Número):</label>
+                        <input type="text" id="cfg-zap" placeholder="Ex: 5512999999999">
+                        <label>Sobre Nós:</label>
+                        <textarea id="cfg-sobre" rows="4"></textarea>
+                        <button class="btn btn-blue" onclick="salvarConfig()"><i class="fas fa-save"></i> Salvar Tudo</button>
                     </div>
 
-                    <div class="full check-oferta" style="flex-direction: column; align-items: flex-start;">
-                        <div style="display:flex; align-items:center; gap:10px;">
-                            <input type="checkbox" id="oferta">
-                            <label for="oferta" style="color:#fff; cursor:pointer; margin:0;">🔥 Destacar no Banner?</label>
+                    <div class="card-admin">
+                        <h2><i class="fas fa-image"></i> Banners</h2>
+                        <input type="file" id="banner-upload" accept="image/*">
+                        <button class="btn btn-blue" onclick="salvarBannerPromo()">+ Adicionar Banner</button>
+                        <div id="lista-banners" style="margin-top:20px;"></div>
+                    </div>
+                </aside>
+
+                <main>
+                    <div class="card-admin">
+                        <h2 id="titulo-form"><i class="fas fa-car"></i> Gerenciar Veículo</h2>
+                        <div style="grid-column: 1/-1;">
+                            <label>Fotos (Selecione e ARRASTE para ordenar):</label>
+                            <input type="file" id="fotos-input" multiple accept="image/*" onchange="processarFotos(this)">
+                            <div id="preview-fotos" ondragover="event.preventDefault()">
+                                <p id="placeholder-msg" style="color: #666; font-size: 0.8rem; width: 100%; text-align: center;">Nenhuma foto selecionada. A primeira é a CAPA.</p>
+                            </div>
                         </div>
-                        <input type="text" id="frase-destaque" placeholder="Frase de Impacto (Ex: IPVA GRÁTIS)" style="margin-top:10px; display:none;">
+
+                        <div style="margin-top: 20px; background: #222; padding: 15px; border-radius: 8px; border: 1px solid var(--border);">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <input type="checkbox" id="oferta" style="width: auto; margin-bottom: 0;">
+                                <label for="oferta" style="cursor: pointer; font-weight: bold;">⭐ Destacar no Banner Principal</label>
+                            </div>
+                            <input type="text" id="frase-destaque" placeholder="Frase Impacto (Ex: IPVA 2026 GRÁTIS)" style="margin-top: 15px; display: none;">
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px;">
+                            <input type="text" id="modelo" placeholder="MODELO" style="text-transform: uppercase;">
+                            <input type="text" id="versao" placeholder="VERSÃO">
+                            <input type="text" id="preco" placeholder="PREÇO (R$)">
+                            <input type="text" id="ano" placeholder="ANO">
+                            <input type="text" id="km" placeholder="KM">
+                            <input type="text" id="cidade" value="São José dos Campos - SP">
+                        </div>
+
+                        <button class="btn btn-gold" id="btn-save" onclick="salvarCarro()">🚀 Publicar Carro</button>
                     </div>
 
-                    <div><label>Modelo:</label><input type="text" id="modelo" style="text-transform: uppercase;"></div>
-                    <div><label>Versão:</label><input type="text" id="versao"></div>
-                    <div><label>Preço (R$):</label><input type="text" id="preco"></div>
-                    <div><label>Ano:</label><input type="text" id="ano"></div>
-                    <div><label>KM:</label><input type="text" id="km"></div>
-                    <div><label>Cidade:</label><input type="text" id="cidade" value="São José dos Campos - SP"></div>
-
-                    <div class="full">
-                        <button class="btn btn-gold" onclick="salvarCarro()">+ Cadastrar</button>
+                    <div class="card-admin">
+                        <h2><i class="fas fa-list"></i> Estoque</h2>
+                        <div id="lista"></div>
                     </div>
-                </div>
+                </main>
             </div>
-
-        </div>
-
-        <div class="card-admin">
-            <h2>📦 Estoque Atual</h2>
-            <div id="lista"></div>
         </div>
     </div>
 
     <script>
-        // Checkbox lógica
+        let editId = null;
+        let fotosArray = []; 
+
         document.getElementById('oferta').addEventListener('change', function() {
             document.getElementById('frase-destaque').style.display = this.checked ? 'block' : 'none';
         });
@@ -132,158 +135,145 @@
                 document.getElementById('login-box').style.display = 'none';
                 document.getElementById('painel').style.display = 'block';
                 carregarTudo();
-            } else { alert('Senha Incorreta!'); }
+            } else { alert("Senha incorreta!"); }
         }
 
-        // --- BANNERS ---
-        function salvarBannerPromo() {
-            const file = document.getElementById('banner-upload').files[0];
-            if(!file) return alert('Selecione uma imagem!');
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const banners = JSON.parse(localStorage.getItem('talisson_banners')) || [];
-                banners.push({ id: Date.now(), imagem: e.target.result });
-                localStorage.setItem('talisson_banners', JSON.stringify(banners));
-                alert('Banner Adicionado!');
-                carregarTudo();
-            };
-            reader.readAsDataURL(file);
-        }
-        function deletarBanner(id) {
-            if(confirm('Apagar banner?')) {
-                let banners = JSON.parse(localStorage.getItem('talisson_banners')) || [];
-                banners = banners.filter(b => b.id !== id);
-                localStorage.setItem('talisson_banners', JSON.stringify(banners));
-                carregarTudo();
-            }
+        // --- ARRASTAR E SOLTAR (DRAG AND DROP) ---
+        function processarFotos(input) {
+            const files = Array.from(input.files);
+            const promessas = files.map(file => {
+                return new Promise(resolve => {
+                    const reader = new FileReader();
+                    reader.onload = e => resolve(e.target.result);
+                    reader.readAsDataURL(file);
+                });
+            });
+            Promise.all(promessas).then(resultados => {
+                fotosArray = [...fotosArray, ...resultados];
+                renderizarFotos();
+                input.value = ""; 
+            });
         }
 
-        // --- CARROS ---
-        function salvarCarro() {
-            const inputs = ['modelo', 'versao', 'preco', 'ano', 'km', 'cidade'];
-            let valido = true;
-            inputs.forEach(id => { if(!document.getElementById(id).value) valido = false; });
+        function renderizarFotos() {
+            const container = document.getElementById('preview-fotos');
+            container.innerHTML = "";
             
-            const fotosInp = document.getElementById('fotos');
-            if(fotosInp.files.length === 0 || !valido) return alert('Preencha tudo!');
+            if (fotosArray.length === 0) {
+                container.innerHTML = '<p id="placeholder-msg" style="color: #666; font-size: 0.8rem; width: 100%; text-align: center;">Nenhuma foto selecionada.</p>';
+                return;
+            }
 
-            const promises = Array.from(fotosInp.files).map(f => new Promise(r => {
-                const reader = new FileReader();
-                reader.onload = e => r(e.target.result);
-                reader.readAsDataURL(f);
-            }));
+            fotosArray.forEach((foto, index) => {
+                const div = document.createElement('div');
+                div.className = `foto-box ${index === 0 ? 'capa' : ''}`;
+                div.draggable = true;
+                div.innerHTML = `
+                    ${index === 0 ? '<span class="label-capa">CAPA</span>' : ''}
+                    <img src="${foto}">
+                    <button class="btn-delete-foto" onclick="removerFoto(${index})"><i class="fas fa-times"></i></button>
+                `;
 
-            Promise.all(promises).then(fotos => {
-                const carro = {
-                    id: Date.now(), fotos: fotos,
-                    modelo: document.getElementById('modelo').value,
-                    versao: document.getElementById('versao').value,
-                    preco: document.getElementById('preco').value,
-                    ano: document.getElementById('ano').value,
-                    km: document.getElementById('km').value,
-                    cidade: document.getElementById('cidade').value,
-                    oferta: document.getElementById('oferta').checked,
-                    fraseDestaque: document.getElementById('frase-destaque').value
+                // Eventos de Arrastar
+                div.ondragstart = (e) => { e.dataTransfer.setData('text/plain', index); div.style.opacity = "0.5"; };
+                div.ondragend = () => { div.style.opacity = "1"; };
+                div.ondrop = (e) => {
+                    e.preventDefault();
+                    const fromIndex = e.dataTransfer.getData('text/plain');
+                    const toIndex = index;
+                    const movedItem = fotosArray.splice(fromIndex, 1)[0];
+                    fotosArray.splice(toIndex, 0, movedItem);
+                    renderizarFotos();
                 };
-                const db = JSON.parse(localStorage.getItem('talisson_final_db')) || [];
-                db.push(carro);
-                localStorage.setItem('talisson_final_db', JSON.stringify(db));
-                alert('Salvo!');
-                carregarTudo();
-                document.querySelectorAll('input').forEach(i => i.value='');
+                
+                container.appendChild(div);
             });
         }
-        function deletarCarro(id) {
-            if(confirm('Apagar?')) {
-                let db = JSON.parse(localStorage.getItem('talisson_final_db')) || [];
-                db = db.filter(c => c.id !== id);
-                localStorage.setItem('talisson_final_db', JSON.stringify(db));
-                carregarTudo();
-            }
+
+        function removerFoto(index) {
+            fotosArray.splice(index, 1);
+            renderizarFotos();
         }
 
-        // --- CONFIG ---
-        function salvarConfig() {
-            const config = { zap: document.getElementById('cfg-zap').value, sobre: document.getElementById('cfg-sobre').value };
-            localStorage.setItem('talisson_config', JSON.stringify(config));
-            alert('Config Salva!');
+        // --- SALVAR E EDITAR ---
+        function salvarCarro() {
+            if (fotosArray.length === 0) return alert("Selecione fotos!");
+            const campos = ['modelo', 'versao', 'preco', 'ano', 'km'];
+            for (let c of campos) if (!document.getElementById(c).value) return alert("Preencha campos!");
+
+            let db = JSON.parse(localStorage.getItem('talisson_final_db')) || [];
+            const carro = {
+                id: editId || Date.now(),
+                fotos: fotosArray,
+                modelo: document.getElementById('modelo').value,
+                versao: document.getElementById('versao').value,
+                preco: document.getElementById('preco').value,
+                ano: document.getElementById('ano').value,
+                km: document.getElementById('km').value,
+                cidade: document.getElementById('cidade').value,
+                oferta: document.getElementById('oferta').checked,
+                fraseDestaque: document.getElementById('frase-destaque').value
+            };
+
+            if (editId) db = db.filter(c => c.id !== editId);
+            db.push(carro);
+            localStorage.setItem('talisson_final_db', JSON.stringify(db));
+            alert("Veículo Salvo!");
+            location.reload();
         }
 
-        // --- LEADS (ESSA É A PARTE NOVA QUE FALTAVA) ---
-        function apagarLead(id) {
-            if(confirm('Arquivar este pedido?')) {
-                let leads = JSON.parse(localStorage.getItem('talisson_leads')) || [];
-                leads = leads.filter(l => l.id !== id);
-                localStorage.setItem('talisson_leads', JSON.stringify(leads));
-                carregarTudo();
-            }
+        function prepararEdicao(id) {
+            const db = JSON.parse(localStorage.getItem('talisson_final_db')) || [];
+            const c = db.find(x => x.id === id);
+            editId = id;
+            fotosArray = [...c.fotos];
+            renderizarFotos();
+            document.getElementById('modelo').value = c.modelo;
+            document.getElementById('versao').value = c.versao;
+            document.getElementById('preco').value = c.preco;
+            document.getElementById('ano').value = c.ano;
+            document.getElementById('km').value = c.km;
+            document.getElementById('oferta').checked = c.oferta;
+            document.getElementById('frase-destaque').value = c.fraseDestaque || '';
+            document.getElementById('frase-destaque').style.display = c.oferta ? 'block' : 'none';
+            document.getElementById('titulo-form').innerHTML = `<i class="fas fa-edit"></i> Editando: ${c.modelo}`;
+            document.getElementById('btn-save').innerText = "Salvar Alterações";
+            window.scrollTo(0,0);
         }
 
-        // --- CARREGAR TUDO ---
         function carregarTudo() {
-            // 1. LEADS
-            const leads = JSON.parse(localStorage.getItem('talisson_leads')) || [];
-            const listaL = document.getElementById('lista-leads');
-            listaL.innerHTML = '';
-            if(leads.length === 0) listaL.innerHTML = '<p style="color:#666">Nenhuma proposta ainda.</p>';
-            
-            leads.forEach(l => {
-                const msgZap = `Olá ${l.nome}, recebemos sua proposta para o *${l.carro}* (Entrada: R$${l.entrada}). Vamos conversar?`;
-                const link = `https://wa.me/55${l.zap}?text=${encodeURIComponent(msgZap)}`;
-
-                listaL.innerHTML += `
-                    <div class="lead-item">
-                        <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-                            <strong style="color:#007bff; font-size:1.1rem;">${l.nome}</strong>
-                            <small style="color:#aaa">${l.data}</small>
-                        </div>
-                        <div style="color:#ddd; font-size:0.9rem; line-height:1.5;">
-                            🚗 <b>${l.carro}</b><br>
-                            💰 Entrada: R$ ${l.entrada} | ${l.parcelas}<br>
-                            📄 CPF: ${l.cpf}<br>
-                            📱 Tel: ${l.zap}
-                        </div>
-                        <div style="margin-top:10px; display:flex; gap:10px;">
-                            <a href="${link}" target="_blank" class="btn btn-blue" style="text-decoration:none; text-align:center; font-size:0.8rem; padding:8px;">Chamar no Zap</a>
-                            <button class="btn btn-red" onclick="apagarLead(${l.id})" style="font-size:0.8rem; width:auto;">Arquivar</button>
-                        </div>
-                    </div>`;
-            });
-
-            // 2. CARROS
             const db = JSON.parse(localStorage.getItem('talisson_final_db')) || [];
             const lista = document.getElementById('lista');
             lista.innerHTML = '';
             db.forEach(c => {
                 lista.innerHTML += `
                     <div class="item-lista">
-                        <div style="display:flex; align-items:center;">
+                        <div style="display:flex; align-items:center; gap:15px;">
                             <img src="${c.fotos[0]}" class="thumb">
-                            <div><strong>${c.modelo}</strong> <br> <small>${c.oferta ? '🔥 ' + c.fraseDestaque : ''}</small></div>
+                            <div><strong>${c.modelo}</strong> ${c.oferta ? '<span class="badge-oferta">BANNER</span>' : ''}<br><small style="color:#666">${c.versao}</small></div>
                         </div>
-                        <button class="btn btn-red" onclick="deletarCarro(${c.id})">Apagar</button>
+                        <div style="display:flex; gap:10px;">
+                            <button class="btn btn-blue" onclick="prepararEdicao(${c.id})" style="width:auto; padding:5px 10px;">Editar</button>
+                            <button class="btn btn-red" onclick="apagar(${c.id})">X</button>
+                        </div>
                     </div>`;
             });
-
-            // 3. BANNERS
+            const config = JSON.parse(localStorage.getItem('talisson_config')) || {};
+            document.getElementById('cfg-zap').value = config.zap || '';
+            document.getElementById('cfg-sobre').value = config.sobre || '';
+            
             const banners = JSON.parse(localStorage.getItem('talisson_banners')) || [];
             const listaB = document.getElementById('lista-banners');
             listaB.innerHTML = '';
             banners.forEach(b => {
-                listaB.innerHTML += `
-                    <div class="item-lista">
-                        <img src="${b.imagem}" class="thumb" style="width:100px;">
-                        <button class="btn btn-red" onclick="deletarBanner(${b.id})">X</button>
-                    </div>`;
+                listaB.innerHTML += `<div class="item-lista"><img src="${b.imagem}" class="thumb" style="width:100px;"><button class="btn btn-red" onclick="deletarBanner(${b.id})">X</button></div>`;
             });
-
-            // 4. CONFIG
-            const config = JSON.parse(localStorage.getItem('talisson_config')) || {};
-            if(config.zap) document.getElementById('cfg-zap').value = config.zap;
-            if(config.sobre) document.getElementById('cfg-sobre').value = config.sobre;
         }
 
-        carregarTudo();
+        function apagar(id) { if(confirm("Apagar veículo?")) { let db = JSON.parse(localStorage.getItem('talisson_final_db')); db = db.filter(c => c.id !== id); localStorage.setItem('talisson_final_db', JSON.stringify(db)); carregarTudo(); } }
+        function salvarConfig() { const cfg = { zap: document.getElementById('cfg-zap').value, sobre: document.getElementById('cfg-sobre').value }; localStorage.setItem('talisson_config', JSON.stringify(cfg)); alert("Configuração salva!"); }
+        function salvarBannerPromo() { const file = document.getElementById('banner-upload').files[0]; if(!file) return alert("Selecione imagem"); const reader = new FileReader(); reader.onload = function(e) { const banners = JSON.parse(localStorage.getItem('talisson_banners')) || []; banners.push({ id: Date.now(), imagem: e.target.result }); localStorage.setItem('talisson_banners', JSON.stringify(banners)); carregarTudo(); }; reader.readAsDataURL(file); }
+        function deletarBanner(id) { let banners = JSON.parse(localStorage.getItem('talisson_banners')); banners = banners.filter(b => b.id !== id); localStorage.setItem('talisson_banners', JSON.stringify(banners)); carregarTudo(); }
     </script>
 </body>
 </html>
